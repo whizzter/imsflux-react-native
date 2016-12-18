@@ -1,0 +1,24 @@
+{
+  "name": "imsflux-react-native",
+  "version": "0.1.0",
+  "description": "imsflux bindings for react-native",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/whizzter/imsflux-react-native.git"
+  },
+  "keywords": [
+    "react",
+    "react-native",
+    "imsflux"
+  ],
+  "author": "Jonas Lund",
+  "license": "BSD-2-Clause",
+  "bugs": {
+    "url": "https://github.com/whizzter/imsflux-react-native/issues"
+  },
+  "homepage": "https://github.com/whizzter/imsflux-react-native#readme"
+}
