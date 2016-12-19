@@ -40,7 +40,7 @@ imsfluxrn.connect=function(stores,Cls) {
 	let computeState=()=>{
 		return stores.reduce( (iv,storename)=>{
 			if ( storename in __imsflux_store_registry__) {
-				iv[storename]=imsflux.store(storename); //  __imsflux_store_registry__[storename].state;
+				iv[storename]=imsflux.store(storename).get(); //  __imsflux_store_registry__[storename].state;
 			}
 			return iv;
 		},{})
