@@ -8,8 +8,10 @@ let imsfluxrn={};
 // proxy imsflux for simplified usage.
 imsfluxrn.store=(...args)=>imsflux.store(...args);
 imsfluxrn.dispatch=(...args)=>imsflux.dispatch(...args);
+imsfluxrn.get=(store)=>imsflux.get(store);
+imsfluxrn.trigger=(...args)=>imsflux.trigger(...args);
 
-imsfluxrn.persistent=function(store) {
+imsfluxrn.persistent=function(store,defVal) {
 	let storeKey="imsflux:"+store;
 	let regper=()=>{
 		imsflux.store(store).listen((state)=>{
@@ -23,15 +25,20 @@ imsfluxrn.persistent=function(store) {
 	}
 	AsyncStorage.getItem(storeKey)
 	.then((v)=>{
-		console.log("Got "+v+" for store "+store);
+		console.log("Got "+v+" for store "+store+" ("+(typeof v)+")");
 		if (v!==null) {
 			let data=JSON.parse(v);
 			imsflux.dispatch(store,"imsflux_restore",data);
+		} else {
+			if ("undefined"!==typeof defVal)
+				imsflux.dispatch(store,"imsflux_default",defVal);
 		}
 		regper();
 	})
 	.catch((err)=>{
 		console.log("Error loading store "+store);
+		if ("undefined"!==typeof defVal)
+			imsflux.dispatch(store,"imsflux_default",defVal);
 		regper();
 	})
 };
